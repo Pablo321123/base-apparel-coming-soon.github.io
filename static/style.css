@@ -22,38 +22,52 @@
 body {
     display: grid;
     grid-template-columns: 60% 40%;
+    grid-template-rows: 100%;
     height: 100vh;
     align-items: center;
     background: var(--gradient-white);
 }
 
+header {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 1;
+    align-self: flex-start;
+    justify-self: flex-start;
+    padding: 5rem 0 0 20%;
+}
+
+header img {
+    width: 10rem;
+}
+
 main {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     width: 100%;
     height: 100%;
-    padding: 5rem 0 0 15rem;
+    padding: 5rem 0 0 20%;
     gap: 7rem;
     background-image: url(../images/bg-pattern-desktop.svg);
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-main header img {
-    width: 10rem;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 main section {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 58%;
 }
 
 main section h1 {
     color: var(--primary-desaturated-red);
     font-weight: var(--font-weight-300);
     font-size: 4rem;
-    letter-spacing: 3rem;
+    letter-spacing: 1.85rem;
     text-transform: uppercase;
 }
 
@@ -68,7 +82,7 @@ main section article h2 {
     color: var(--neutral-Dark-grayish-red);
     font-weight: var(--font-weight-600);
     font-size: 5rem;
-    letter-spacing: 2rem;
+    letter-spacing: 1rem;
     text-transform: uppercase;
 }
 
@@ -76,9 +90,14 @@ main section article p {
     color: var(--primary-desaturated-red);
     font-weight: var(--font-weight-400);
     width: 70%;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     line-height: 2rem;
 }
+
+main .email-address-container {
+    position: relative;
+}
+
 
 main .email-address-container form {
     display: flex;
@@ -87,15 +106,30 @@ main .email-address-container form {
     width: 70%;
 }
 
+main .email-address-container::after {
+    content: var(--error-content);
+    position: absolute;
+    left: 2rem;
+    padding-top: 0.7rem;
+    color: var(--primary-soft-red);
+}
+
 main .email-address-container input[type='email'] {
     outline: none;
     width: 100%;
     padding: 1rem 2rem;
     border-style: none;
-    border: 1px solid var(--neutral-Dark-grayish-red);
+    border: 1px solid var(--primary-desaturated-red-light);
     border-radius: 5rem;
     font-size: 1.2rem;
+    background-color: transparent;
 }
+
+main .email-address-container input[type='email'].error,
+main .email-address-container input[type='email'].error:placeholder-shown {
+    border: 1px solid var(--primary-soft-red);
+}
+
 
 main .email-address-container input[type='email']:placeholder-shown {
     border: 1px solid var(--primary-desaturated-red-light);
@@ -105,20 +139,45 @@ main .email-address-container input[type='email']::placeholder {
     color: var(--primary-desaturated-red-light);
 }
 
+main .email-address-container form span {
+    display: none;
+}
+
+main .email-address-container form input[type='email'].error+span {
+    display: flex;
+    position: absolute;
+    right: 7rem;
+    z-index: 2;
+}
+
 main .email-address-container button {
     display: flex;
     position: absolute;
-    right: 1px;
+    right: 0;
     width: 6rem;
     padding: 1rem 2rem;
     border-radius: 50rem;
     border-style: none;
+    outline: none;
     align-items: center;
     justify-content: center;
     background: var(--gradient-lightPink);
     cursor: pointer;
+    transition: 0.5s ease;
+    box-shadow:
+        0.8px 2.2px 2.2px rgba(0, 0, 0, 0.043),
+        2px 5.3px 5.3px rgba(0, 0, 0, 0.051),
+        3.8px 9.9px 10px rgba(0, 0, 0, 0.054),
+        6.7px 17.6px 17.9px rgba(0, 0, 0, 0.055),
+        12.5px 33px 33.4px rgba(0, 0, 0, 0.057),
+        30px 79px 80px rgba(0, 0, 0, 0.07);
 }
 
+main button:hover {
+    transform: scale(1.1, 1.1);
+    background: linear-gradient(135deg, hsl(0, 80%, 95%), hsl(0, 74%, 86%));
+    ;
+}
 
 .woman-image {
     width: 100%;
@@ -126,5 +185,129 @@ main .email-address-container button {
     background-image: url(../images//hero-desktop.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    grid-row: 1;
+    grid-column: 2;
+}
 
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 30%;
+    justify-content: center;
+    width: 100%;
+      transform: translateY(-2rem);
+}
+
+
+@media (max-width:950px) {
+    body {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40% 60%;
+        min-width: 20rem;
+        row-gap: 3.5rem;
+    }
+
+    header {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        padding: 2rem 0 0 10%;
+    }
+
+    header img {
+        max-width: 7rem;
+    }
+
+    .woman-image {
+        justify-self: flex-start;
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: 15rem;
+        margin-top: 5rem;
+        max-width: 42.5rem;
+        background-image: url('../images/hero-mobile.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+
+    main {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 0;
+        justify-content: flex-start;
+    }
+
+    main section {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1;
+        grid-row: 2;
+        align-items: center;
+        text-align: center;
+    }
+
+    main section h1 {
+        font-size: 2rem;
+        letter-spacing: 0.7rem;
+    }
+
+
+    main section article h2 {
+        font-size: 2rem;
+        letter-spacing: 0.8rem;
+    }
+
+    main section article p {
+        width: 100%;
+        padding-inline: 2.5rem;
+        font-size: 0.85rem;
+        line-height: 1.5rem;
+    }
+
+    main .email-address-container {
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main .email-address-container form {
+        width: 100%;
+    }
+
+    main .email-address-container input[type='email'] {
+        width: 100%;
+        padding: 1rem 2rem;
+        font-size: 0.85rem;
+    }
+
+    main .email-address-container button {
+        width: 4.25rem;
+        padding: 0.85rem 2rem;
+    }
+
+    main .email-address-container form input[type='email'].error+span {
+        right: 5rem;
+    }
+
+    main .email-address-container::after {
+        position: relative;
+        left: 0;
+        font-size: 0.8rem;
+        padding-top: 0.8rem;
+    }
+
+    footer {
+        grid-column: 1;
+        grid-row: 1;
+        transform: translateY(0);
+        padding-inline: 2rem;
+    }
 }

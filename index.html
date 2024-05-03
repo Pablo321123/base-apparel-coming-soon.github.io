@@ -27,21 +27,21 @@
 </head>
 
 <body>
-
+  <header>
+    <img src="images/logo.svg" alt="logo">
+  </header>
   <main>
-    <header>
-      <img src="images/logo.svg" alt="logo">
-    </header>
     <section>
       <h1>We're</h1>
       <article>
-        <h2>coming soon</h2>
+        <h2>coming<br>soon</h2>
         <p>Hello fellow shoppers! We're currently building our new fashion store.
           Add your email below to stay up-to-date with announcements and our launch deals.
         </p>
-        <div class="email-address-container">
+        <div id="email-address-container" class="email-address-container">
           <form action="#">
             <input type="email" placeholder="Email Address" aria-label="email-address-field">
+            <span><img src="images/icon-error.svg" alt=""></span>
             <button aria-label="send-email-button"><img src="images/icon-arrow.svg" alt=""></button>
           </form>
         </div>
@@ -57,6 +57,36 @@
 
   <figure class="woman-image">
   </figure>
+
+  <script>
+    const containerEmail = document.getElementById('email-address-container')
+    const form = containerEmail.querySelector('form')
+    const txtEmail = form.querySelector('input')
+    const btSend = form.querySelector('button')
+
+    btSend.addEventListener('click', (e) => {
+      e.preventDefault()
+
+      if (txtEmail.value === '') {
+        txtEmail.classList.add('error')
+        containerEmail.style.setProperty('--error-content', "'Whoops! It looks like you forgot to add your email'")
+      } else if (!txtEmail.validity.valid) {
+        txtEmail.classList.add('error')
+        containerEmail.style.setProperty('--error-content', "'Please provide a valid email address'")
+      } else {
+        txtEmail.classList.remove('error')
+        containerEmail.style.removeProperty('--error-content')
+
+        if (form.checkValidity()) {
+          form.submit()
+          txtEmail.value = ''
+        }
+      }
+
+    })
+
+
+  </script>
 </body>
 
 </html>
